@@ -1,0 +1,13 @@
+HTML:
+
+<form>
+    <input type="text" id="formValueId" name="valueId"/>
+    <input type="button" id="myButton" />
+</form>
+JavaScript:
+
+$(document).ready(function() {
+    $('#myButton').click(function() {
+      foo($('#formValueId').val());
+    });
+});

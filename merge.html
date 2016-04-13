@@ -36,39 +36,9 @@
 				materials.push( [ new THREE.MeshBasicMaterial( { color: Math.random() * 0xffffff, wireframe: false } ) ] );
 			}
 			var geometriesParams = [
-				{ type: 'BoxGeometry', args: [ 200, 200, 200, 2, 2, 2, materials ] },
-				{ type: 'TorusGeometry', args: [ 100, 60, 12, 12 ] },
-				{ type: 'TorusKnotGeometry', args: [  ] },
-				{ type: 'SphereGeometry', args: [ 100, 12, 12 ] },
-				{ type: 'SphereGeometry', args: [ 100, 5, 5 ] },
-				{ type: 'SphereGeometry', args: [ 100, 13, 13 ] },
-				{ type: 'IcosahedronGeometry', args: [ 100, 1 ] },
-				{ type: 'CylinderGeometry', args: [ 25, 75, 200, 8, 3 ]} ,
-				{ type: 'OctahedronGeometry', args: [200, 0] },
-				{ type: 'LatheGeometry', args: [ [
-					new THREE.Vector2(0,-100),
-					new THREE.Vector2(50,-50),
-					new THREE.Vector2(10,0),
-					new THREE.Vector2(50,050),
-					new THREE.Vector2(0,100) ] ]},
-				{ type: 'LatheGeometry', args: [ [
-					new THREE.Vector2(0,-100),
-					new THREE.Vector2(50,-50),
-					new THREE.Vector2(10,0),
-					new THREE.Vector2(50,050),
-					new THREE.Vector2(100,100) ], 12, 0, Math.PI ] },
-				{ type: 'LatheGeometry', args: [ [
-					new THREE.Vector2(10,-100),
-					new THREE.Vector2(50,-50),
-					new THREE.Vector2(10,0),
-					new THREE.Vector2(50,050),
-					new THREE.Vector2(0,100) ], 12, Math.PI*2/3, Math.PI*3/2 ] },
-				{ type: 'TextGeometry', args: ['&', {
-						size: 200,
-						height: 50,
-						curveSegments: 1
-					}]},
-				{ type: 'PlaneGeometry', args: [ 200, 200, 4, 4 ] }
+		
+				{ type: 'CylinderGeometry', args: [ 25, 75, 200, 8, 3 ]} 
+			
 			];
 			var loader = new THREE.FontLoader();
 			loader.load( 'fonts/helvetiker_regular.typeface.js', function ( font ) {

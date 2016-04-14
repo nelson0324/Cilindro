@@ -1,30 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>three.js webgl - geometry - Subdivisions with Catmull-Clark</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<style>
-			body {
-				font-family: Monospace;
-				background-color: #f0f0f0;
-				margin: 0px;
-				overflow: hidden;
-			}
-		</style>
-	</head>
-	<body>
-
-		<script src="js/three.min.js"></script>
-		<script src="js/controls/OrbitControls.js"></script>
-		<script src="js/libs/stats.min.js"></script>
-
-		<script>
 
 			var container, stats;
-
 			var camera, controls, scene, renderer;
-
 			var cube, plane;
 			var cylindergeometry2;
 
@@ -74,8 +50,8 @@
 
 			// start scene
 
-			init();
-			animate();
+		//	init();
+		animate();
 
 			function nextGeometry() {
 
@@ -191,9 +167,13 @@
 
         var cylinder2 = new THREE.Mesh(cylindergeometry2, cylindermaterial);
 
-				var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: 0xfefefe, wireframe: true, opacity: 0.5 } ) );
+		//	var mesh = new THREE.MeshPhongMaterial( { color: 0x000000, specular: 0x666666, emissive: 0xff0000, shininess: 10, shading: THREE.SmoothShading, opacity: 0.9, transparent: true } );
+	//		var mesh = new THREE.MeshStandardMaterial( { map: imgTexture, bumpMap: imgTexture, bumpScale: bumpScale, color: diffuseColor, metalness: metalness, roughness: roughness, shading: THREE.SmoothShading, envMap: localReflectionCube } )
+
+		//trasparente
+			var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: 0xfefefe, wireframe: true, opacity: 0.5 } ) );
 				group.add( mesh );
-				group.add( cylinder2 );
+			//	group.add( cylinder2 );
 
 				var fvNames = [ 'a', 'b', 'c', 'd' ];
 
@@ -253,10 +233,10 @@
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
 
-				info = document.createElement( 'div' );
-				info.style.position = 'absolute';
+				info = document.getElementById( 'grafico' );
+				info.style.position = 'relative';
 				info.style.top = '10px';
-				info.style.width = '100%';
+				info.style.width = '50%';
 				info.style.textAlign = 'center';
 				info.innerHTML = 'Drag to spin the geometry ';
 				container.appendChild( info );
@@ -323,8 +303,3 @@
 				cylindergeometry2 = new THREE.CylinderGeometry(40, 40, 200, 150, false);
 				//alert(cylindergeometry2);
 			}
-
-		</script>
-
-	</body>
-</html>

@@ -3,8 +3,11 @@
 			var camera, controls, scene, renderer;
 			var cube, plane;
 			var cylindergeometry2;
-
-			// Create new object by parameters
+			var radioCylindro;
+			var geometriesParams;
+			var geometryIndex = 0;
+			var loader;
+			var materials = [];
 
 			var createSomething = function( klass, args ) {
 
@@ -20,10 +23,21 @@
 
 			};
 
+			// Create new object by parameters
 
-			// Cube
+			function setVars(radio){
 
-			var materials = [];
+				alert(radio);
+				radioCylindro=radio;
+				crearGrafico();
+
+				init();
+				animate();
+					addStuff();
+			}
+
+			function crearGrafico(){
+
 
 			for ( var i = 0; i < 6; i ++ ) {
 
@@ -31,14 +45,15 @@
 
 			}
 
-			var geometriesParams = [
+		 geometriesParams = [
 
 
-				{ type: 'CylinderGeometry', args: [ 20, 20, 200, 8, 35 ]} ,
+				{ type: 'CylinderGeometry', args: [ radioCylindro, 20, 200, 8, 35 ]} ,
 
 			];
+			alert(radioCylindro);
 
-			var loader = new THREE.FontLoader();
+			loader = new THREE.FontLoader();
 			loader.load( 'fonts/helvetiker_regular.typeface.js', function ( font ) {
 
 				geometriesParams[ 12 ].args[ 1 ].font = font;
@@ -46,12 +61,30 @@
 			} );
 
 			var info;
-			var geometryIndex = 0;
+
 
 			// start scene
 
 		//	init();
-		animate();
+
+
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 			function nextGeometry() {
 
@@ -74,35 +107,7 @@
 				addStuff();
 			}
 
-			function updateInfo() {
 
-				var params = geometriesParams[ geometryIndex ];
-
-				var dropdown = '<select id="dropdown" onchange="switchGeometry(this.value)">';
-
-				for (  i = 0; i < geometriesParams.length; i ++ ) {
-					dropdown += '<option value="' + i + '"';
-
-					dropdown += (geometryIndex == i)  ? ' selected' : '';
-
-					dropdown += '>' + geometriesParams[i].type + '</option>';
-				}
-
-				dropdown += '</select>';
-
-				var text =
-					'Drag to spin THREE.' + params.type +
-				 	'<br>' +
-					'<br>Geometry: ' + dropdown + ' <a href="#" onclick="nextGeometry();return false;">next</a>';
-
-				text +=
-					'<br><br><font color="3333FF">Blue Arrows: Face Normals</font>' +
-					'<br><font color="FF3333">Red Arrows: Vertex Normals before Geometry.mergeVertices</font>' +
-					'<br>Black Arrows: Vertex Normals after Geometry.mergeVertices';
-
-				info.innerHTML = text;
-
-			}
 
 			function addStuff() {
 
@@ -111,8 +116,6 @@
 					scene.remove( group );
 
 				}
-
-
 
 				var params = geometriesParams[ geometryIndex ];
 
@@ -133,7 +136,7 @@
 				geometry.computeFaceNormals();
 				geometry.computeVertexNormals( true );
 
-				updateInfo();
+			//	updateInfo();
 
 				var faceABCD = "abcd";
 				var color, f, p, n, vertexIndex;
@@ -228,8 +231,8 @@
 
 			}
 
-			function init() {
-
+			function init(radiusTop) {
+				radioCylindro=radiusTop;
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
 

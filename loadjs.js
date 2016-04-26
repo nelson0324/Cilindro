@@ -16,6 +16,11 @@ function loadScript(url, callback)
 }
 
 var myPrettyCode = function() {
+  radio=document.getElementById("radio").value;
+  radioGauss=document.getElementById("radioGauss").value;
 
-   setVars(document.getElementById("radio").value);
+  alturaGauss=document.getElementById("alturaGauss").value;
+    alert(alturaGauss);
+     setVars(radio,radioGauss,alturaGauss);
+
 };

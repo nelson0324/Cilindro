@@ -1,253 +1,65 @@
-/* /!\ You need to add vendor prefixes in order to render the CSS properly (or simply use http://leaverou.github.io/prefixfree/) /!\ */ #tridiv {
-  perspective: 800px;
-  position: absolute;
-  overflow: hidden;
+#container {
+    width:960px;
+    margin:20px auto;
+}
+
+#contenedor {
+    float:left;
+    width:620px;
+
+}
+
+#sidebar {
+    float:right;
+    width:340px;
+
+}
+
+body {
+  background: url(images/dark_wall.png);
+}
+
+
+#footer {
+    clear:both;
+}
+
+input[type="text"], input[type="email"] {
+  width: 40%;
+  padding: 15px 0px 15px 8px;
+  border-radius: 5px;
+  box-shadow: inset 4px 6px 10px -4px rgba(0, 0, 0, 0.3), 0 1px 1px -1px rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.2);
+  outline: none;
+  border: none;
+  border: 1px solid black;
+  margin-bottom: 10px;
+  color: #6E6E6E;
+  text-shadow: #000 0px 1px 5px;
+}
+
+
+
+input[type="submit"] {
   width: 100%;
-  height: 100%;
-  background: #fffdd2;
-  font-size: 100%;
-}
-.face {
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4);
-}
-.scene, .shape, .face, .face-wrapper, .cr {
-  position: absolute;
-  transform-style: preserve-3d;
-}
-.scene {
-  width: 80em;
-  height: 80em;
-  top: 50%;
-  left: 50%;
-  margin: -40em 0 0 -40em;
-}
-.shape {
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  transform-origin: 50%;
-}
-.face, .face-wrapper {
-  overflow: hidden;
-  transform-origin: 0 0;
-  backface-visibility: hidden;
-  /* hidden by default, prevent blinking and other weird rendering glitchs */
-}
-.face {
-  background-size: 100% 100%!important;
-  background-position: center;
-}
-.face-wrapper .face {
-  left: 100%;
-  width: 100%;
-  height: 100%
-}
-.photon-shader {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%
-}
-.side {
-  left: 50%;
-}
-.cr, .cr .side {
-  height: 100%;
-}
-[class*="cylinder"] .tp {
-  transform: rotateX(90deg) translateY(-50%);
-}
-[class*="cylinder"] .bm {
-  transform: rotateX(-90deg) translateY(-50%);
-}
-[class*="cylinder"] .tp, [class*="cylinder"] .bm, [class*="cylinder"] .tp .photon-shader, [class*="cylinder"] .bm .photon-shader {
-  border-radius: 50%;
-}
-[class*="cylinder"] .bm {
-  top: 100%;
-}
-/* .cyl-1 styles */
-.cyl-1 {
-  transform:translate3D(0.625em, 0em, 0em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-  opacity:1;
-  width:6em;
-  height:5em;
-  margin:-2.5em 0 0 -3em;
-}
-.cyl-1 .tp, .cyl-1 .bm {
-  width:6em;
-  height:6em;
-}
-.cyl-1 .side {
-  width:1.3944608463408996em;
-  height:5em;
-}
-.cyl-1 .s0 {
-  transform: rotateY(12.857142857142858deg) translate3D(-50%, 0, 2.975em);
-}
-.cyl-1 .s1 {
-  transform: rotateY(38.57142857142857deg) translate3D(-50%, 0, 2.975em);
-}
-.cyl-1 .s2 {
-  transform: rotateY(64.28571428571429deg) translate3D(-50%, 0, 2.975em);
-}
-.cyl-1 .s3 {
-  transform: rotateY(90deg) translate3D(-50%, 0, 2.975em);
-}
-.cyl-1 .s4 {
-  transform: rotateY(115.71428571428572deg) translate3D(-50%, 0, 2.975em);
-}
-.cyl-1 .s5 {
-  transform: rotateY(141.42857142857144deg) translate3D(-50%, 0, 2.975em);
-}
-.cyl-1 .s6 {
-  transform: rotateY(167.14285714285714deg) translate3D(-50%, 0, 2.975em);
-}
-.cyl-1 .s7 {
-  transform: rotateY(192.85714285714286deg) translate3D(-50%, 0, 2.975em);
-}
-.cyl-1 .s8 {
-  transform: rotateY(218.57142857142858deg) translate3D(-50%, 0, 2.975em);
-}
-.cyl-1 .s9 {
-  transform: rotateY(244.2857142857143deg) translate3D(-50%, 0, 2.975em);
-}
-.cyl-1 .s10 {
-  transform: rotateY(270deg) translate3D(-50%, 0, 2.975em);
-}
-.cyl-1 .s11 {
-  transform: rotateY(295.7142857142857deg) translate3D(-50%, 0, 2.975em);
-}
-.cyl-1 .s12 {
-  transform: rotateY(321.4285714285714deg) translate3D(-50%, 0, 2.975em);
-}
-.cyl-1 .s13 {
-  transform: rotateY(347.1428571428571deg) translate3D(-50%, 0, 2.975em);
-}
-.cyl-1 .face, .cyl-1 .side {
-  background-color:#008000;
-}
-/* .cyl-3 styles */
-.cyl-3 {
-  transform:translate3D(0.625em, 0em, 0.1875em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-  opacity:0.5;
-  width:em;
-  height:7em;
-  margin:-3.5em 0 0 0em;
-}
-.cyl-3 .tp, .cyl-3 .bm {
-  width:em;
-  height:em;
-}
-.cyl-3 .side {
-  width:0.025em;
-  height:7em;
-}
-.cyl-3 .s0 {
-  transform: rotateY(12.857142857142858deg) translate3D(-50%, 0, -0.025em);
-}
-.cyl-3 .s1 {
-  transform: rotateY(38.57142857142857deg) translate3D(-50%, 0, -0.025em);
-}
-.cyl-3 .s2 {
-  transform: rotateY(64.28571428571429deg) translate3D(-50%, 0, -0.025em);
-}
-.cyl-3 .s3 {
-  transform: rotateY(90deg) translate3D(-50%, 0, -0.025em);
-}
-.cyl-3 .s4 {
-  transform: rotateY(115.71428571428572deg) translate3D(-50%, 0, -0.025em);
-}
-.cyl-3 .s5 {
-  transform: rotateY(141.42857142857144deg) translate3D(-50%, 0, -0.025em);
-}
-.cyl-3 .s6 {
-  transform: rotateY(167.14285714285714deg) translate3D(-50%, 0, -0.025em);
-}
-.cyl-3 .s7 {
-  transform: rotateY(192.85714285714286deg) translate3D(-50%, 0, -0.025em);
-}
-.cyl-3 .s8 {
-  transform: rotateY(218.57142857142858deg) translate3D(-50%, 0, -0.025em);
-}
-.cyl-3 .s9 {
-  transform: rotateY(244.2857142857143deg) translate3D(-50%, 0, -0.025em);
-}
-.cyl-3 .s10 {
-  transform: rotateY(270deg) translate3D(-50%, 0, -0.025em);
-}
-.cyl-3 .s11 {
-  transform: rotateY(295.7142857142857deg) translate3D(-50%, 0, -0.025em);
-}
-.cyl-3 .s12 {
-  transform: rotateY(321.4285714285714deg) translate3D(-50%, 0, -0.025em);
-}
-.cyl-3 .s13 {
-  transform: rotateY(347.1428571428571deg) translate3D(-50%, 0, -0.025em);
-}
-.cyl-3 .face, .cyl-3 .side {
-  background-color:#FFFFFF;
-}
-/* .cyl-2 styles */
-.cyl-2 {
-  transform:translate3D(0.5625em, 0em, -0.0625em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-  opacity:0.66;
-  width:12.375em;
-  height:7em;
-  margin:-3.5em 0 0 -6.1875em;
-}
-.cyl-2 .tp, .cyl-2 .bm {
-  width:12.375em;
-  height:12.375em;
-}
-.cyl-2 .side {
-  width:2.8495129955781056em;
-  height:7em;
-}
-.cyl-2 .s0 {
-  transform: rotateY(12.857142857142858deg) translate3D(-50%, 0, 6.1625em);
-}
-.cyl-2 .s1 {
-  transform: rotateY(38.57142857142857deg) translate3D(-50%, 0, 6.1625em);
-}
-.cyl-2 .s2 {
-  transform: rotateY(64.28571428571429deg) translate3D(-50%, 0, 6.1625em);
-}
-.cyl-2 .s3 {
-  transform: rotateY(90deg) translate3D(-50%, 0, 6.1625em);
-}
-.cyl-2 .s4 {
-  transform: rotateY(115.71428571428572deg) translate3D(-50%, 0, 6.1625em);
-}
-.cyl-2 .s5 {
-  transform: rotateY(141.42857142857144deg) translate3D(-50%, 0, 6.1625em);
-}
-.cyl-2 .s6 {
-  transform: rotateY(167.14285714285714deg) translate3D(-50%, 0, 6.1625em);
-}
-.cyl-2 .s7 {
-  transform: rotateY(192.85714285714286deg) translate3D(-50%, 0, 6.1625em);
-}
-.cyl-2 .s8 {
-  transform: rotateY(218.57142857142858deg) translate3D(-50%, 0, 6.1625em);
-}
-.cyl-2 .s9 {
-  transform: rotateY(244.2857142857143deg) translate3D(-50%, 0, 6.1625em);
-}
-.cyl-2 .s10 {
-  transform: rotateY(270deg) translate3D(-50%, 0, 6.1625em);
-}
-.cyl-2 .s11 {
-  transform: rotateY(295.7142857142857deg) translate3D(-50%, 0, 6.1625em);
-}
-.cyl-2 .s12 {
-  transform: rotateY(321.4285714285714deg) translate3D(-50%, 0, 6.1625em);
-}
-.cyl-2 .s13 {
-  transform: rotateY(347.1428571428571deg) translate3D(-50%, 0, 6.1625em);
-}
-.cyl-2 .face, .cyl-2 .side {
-  background-color:#FFFFFF;
+  padding: 15px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#28D2DE), to(#1A878F));
+  background-image: -webkit-linear-gradient(#28D2DE 0%, #1A878F 100%);
+  background-image: -moz-linear-gradient(#28D2DE 0%, #1A878F 100%);
+  background-image: -o-linear-gradient(#28D2DE 0%, #1A878F 100%);
+  background-image: linear-gradient(#28D2DE 0%, #1A878F 100%);
+  font: 14px Oswald;
+  color: #FFF;
+  text-transform: uppercase;
+  text-shadow: #000 0px 1px 5px;
+  border: 1px solid #000;
+  opacity: 0.7;
+  -webkit-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 0.8) !important;
+  -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(rgba(255, 255, 255, 0.2)));
 }

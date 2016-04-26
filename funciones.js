@@ -73,7 +73,7 @@ function crearGrafico(){
 	];
 
 
-	cilindroGausiano = new THREE.CylinderGeometry(radioCylindroGausiano, radioCylindroGausiano, alturaCylindroGausiano, 8, 20);
+	cilindroGausiano = new THREE.CylinderGeometry(radioCylindroGausiano, radioCylindroGausiano, alturaCylindroGausiano, 8, false);
 		//alert(cilindroGausiano);
 
 	alert(radioCylindro);
@@ -131,7 +131,7 @@ function addStuff() {
 	// scale geometry to a uniform size
 	geometry.computeBoundingSphere();
 
-	/*	var scaleFactor = 160 / geometry.boundingSphere.radius;
+/*	var scaleFactor = 160 / geometry.boundingSphere.radius;
 	geometry.scale( scaleFactor, scaleFactor, scaleFactor );*/
 
 	var originalGeometry = geometry.clone();
@@ -143,7 +143,7 @@ function addStuff() {
 	geometry.computeFaceNormals();
 	geometry.computeVertexNormals( true );
 
-	//	updateInfo();
+//	updateInfo();
 
 	var faceABCD = "abcd";
 	var color, f, p, n, vertexIndex;
@@ -177,14 +177,13 @@ function addStuff() {
 
 	var cylinder2 = new THREE.Mesh(cilindroGausiano, cylindermaterial);
 
-	//	var mesh = new THREE.MeshPhongMaterial( { color: 0x000000, specular: 0x666666, emissive: 0xff0000, shininess: 10, shading: THREE.SmoothShading, opacity: 0.9, transparent: true } );
-	//		var mesh = new THREE.MeshStandardMaterial( { map: imgTexture, bumpMap: imgTexture, bumpScale: bumpScale, color: diffuseColor, metalness: metalness, roughness: roughness, shading: THREE.SmoothShading, envMap: localReflectionCube } )
+//	var mesh = new THREE.MeshPhongMaterial( { color: 0x000000, specular: 0x666666, emissive: 0xff0000, shininess: 10, shading: THREE.SmoothShading, opacity: 0.9, transparent: true } );
+//		var mesh = new THREE.MeshStandardMaterial( { map: imgTexture, bumpMap: imgTexture, bumpScale: bumpScale, color: diffuseColor, metalness: metalness, roughness: roughness, shading: THREE.SmoothShading, envMap: localReflectionCube } )
 
-	//trasparente
-	var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: 0x93C54B, wireframe: false, opacity: 10 } ) );
-
+//trasparente
+var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: 0xfefefe, wireframe: true, opacity: 0.5 } ) );
 	group.add( mesh );
-	group.add( cylinder2 );
+group.add( cylinder2 );
 
 	var fvNames = [ 'a', 'b', 'c', 'd' ];
 
@@ -194,53 +193,52 @@ function addStuff() {
 		var face = geometry.faces[ f ];
 
 		var centroid = new THREE.Vector3()
-		.add( geometry.vertices[ face.a ] )
-		.add( geometry.vertices[ face.b ] )
-		.add( geometry.vertices[ face.c ] )
-		.divideScalar( 3 );
+			.add( geometry.vertices[ face.a ] )
+			.add( geometry.vertices[ face.b ] )
+			.add( geometry.vertices[ face.c ] )
+			.divideScalar( 3 );
 
 		var arrow = new THREE.ArrowHelper(
-			face.normal,
-			centroid,
-			normalLength,
-			0x3333FF );
-			mesh.add( arrow );
-		}
+				face.normal,
+				centroid,
+				normalLength,
+				0x3333FF );
+		mesh.add( arrow );
+	}
 
-		for( var f = 0, fl = originalGeometry.faces.length; f < fl; f ++ ) {
-			var face = originalGeometry.faces[ f ];
-			if( face.vertexNormals === undefined ) {
-				continue;
-			}
-			for( var v = 0, vl = face.vertexNormals.length; v < vl; v ++ ) {
-				var arrow = new THREE.ArrowHelper(
+	for( var f = 0, fl = originalGeometry.faces.length; f < fl; f ++ ) {
+		var face = originalGeometry.faces[ f ];
+		if( face.vertexNormals === undefined ) {
+			continue;
+		}
+		for( var v = 0, vl = face.vertexNormals.length; v < vl; v ++ ) {
+			var arrow = new THREE.ArrowHelper(
 					face.vertexNormals[ v ],
 					originalGeometry.vertices[ face[ fvNames[ v ] ] ],
 					normalLength,
 					0xFF3333 );
-					mesh.add( arrow );
-				}
-			}
+			mesh.add( arrow );
+		}
+	}
 
-			for( var f = 0, fl = mesh.geometry.faces.length; f < fl; f ++ ) {
-				var face = mesh.geometry.faces[ f ];
-				if( face.vertexNormals === undefined ) {
-					continue;
-				}
-				for( var v = 0, vl = face.vertexNormals.length; v < vl; v ++ ) {
-					var arrow = new THREE.ArrowHelper(
-						face.vertexNormals[ v ],
-						mesh.geometry.vertices[ face[ fvNames[ v ] ] ],
-						normalLength,
-						0x000000 );
-						mesh.add( arrow );
-					}
-				}
+	for( var f = 0, fl = mesh.geometry.faces.length; f < fl; f ++ ) {
+		var face = mesh.geometry.faces[ f ];
+		if( face.vertexNormals === undefined ) {
+			continue;
+		}
+		for( var v = 0, vl = face.vertexNormals.length; v < vl; v ++ ) {
+			var arrow = new THREE.ArrowHelper(
+					face.vertexNormals[ v ],
+					mesh.geometry.vertices[ face[ fvNames[ v ] ] ],
+					normalLength,
+					0x000000 );
+			mesh.add( arrow );
+		}
+	}
 
-			}
-
+}
 			function init(radiusTop) {
-		
+
 
 				container = document.createElement( 'div' );
 				container.id="contenedor";

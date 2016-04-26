@@ -29,6 +29,10 @@
 
 				alert(radio);
 				radioCylindro=radio;
+				if(	document.getElementById("contendeodr")){
+					var el=document.getElementById("contendeodr");
+					el.parentNode.removeChild( el );
+				}
 				crearGrafico();
 
 				init();
@@ -70,21 +74,6 @@
 
 
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 			function nextGeometry() {
 
@@ -233,13 +222,22 @@
 
 			function init(radiusTop) {
 				radioCylindro=radiusTop;
-				container = document.createElement( 'div' );
-				document.body.appendChild( container );
 
+				container = document.createElement( 'div' );
+				container.id="contendeodr";
+				document.body.appendChild( container );
+/*
 				info = document.getElementById( 'grafico' );
 				info.style.position = 'relative';
 				info.style.top = '10px';
 				info.style.width = '50%';
+				info.style.textAlign = 'center';
+				info.innerHTML = 'Drag to spin the geometry ';
+				container.appendChild( info );*/
+				info = document.createElement( 'div' );
+				info.style.position = 'absolute';
+				info.style.top = '10px';
+				info.style.width = '100%';
 				info.style.textAlign = 'center';
 				info.innerHTML = 'Drag to spin the geometry ';
 				container.appendChild( info );

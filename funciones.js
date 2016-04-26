@@ -68,12 +68,11 @@ function crearGrafico(){
 
 	*/
 	geometriesParams = [
-		{ type: 'CylinderGeometry', args: [ radioCylindro, radioCylindro, 100, 8, 20 ]} ,
+		{ type: 'CylinderGeometry', args: [ radioCylindro, radioCylindro, 200, 20,10 ]} ,
 
 	];
 
-
-	cilindroGausiano = new THREE.CylinderGeometry(radioCylindroGausiano, radioCylindroGausiano, alturaCylindroGausiano, 8, false);
+	cilindroGausiano = new THREE.CylinderGeometry(radioGauss, radioGauss, alturaCylindroGausiano, 20);
 		//alert(cilindroGausiano);
 
 	alert(radioCylindro);
@@ -171,7 +170,7 @@ function addStuff() {
 
 	group = new THREE.Group();
 	scene.add( group );
-//	getVars();
+	getVars();
 	var cylindermaterial = new THREE.MeshLambertMaterial({wireframe: true, color: 0x000000});
 
 
@@ -181,7 +180,11 @@ function addStuff() {
 //		var mesh = new THREE.MeshStandardMaterial( { map: imgTexture, bumpMap: imgTexture, bumpScale: bumpScale, color: diffuseColor, metalness: metalness, roughness: roughness, shading: THREE.SmoothShading, envMap: localReflectionCube } )
 
 //trasparente
-var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: 0xfefefe, wireframe: true, opacity: 0.5 } ) );
+//var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: 0xfefefe, wireframe: true, opacity: 0.5 } ) );
+
+//verde
+var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: 0x93C54B, wireframe: false, opacity: 10 } ) );
+
 	group.add( mesh );
 group.add( cylinder2 );
 
@@ -319,16 +322,7 @@ group.add( cylinder2 );
 
 			}
 
-			function createMesh(geom) {
-
-            // assign two materials
-            var meshMaterial = new THREE.MeshNormalMaterial();
-            meshMaterial.side = THREE.DoubleSide;
-            var wireFrameMat = new THREE.MeshBasicMaterial();
-            wireFrameMat.wireframe = true;
-
-            // create a multimaterial
-            var mesh = THREE.SceneUtils.createMultiMaterialObject(geom, [meshMaterial, wireFrameMat]);
-
-            return mesh;
-        }
+			function getVars(){
+				cylindergeometry2 = new THREE.CylinderGeometry(40, 40, 200, 150, false);
+				//alert(cylindergeometry2);
+			}

@@ -10,6 +10,7 @@ var geometriesParams;
 var geometryIndex = 0;
 var loader;
 var materials = [];
+var tamanioLiniaCE;
 
 var createSomething = function( klass, args ) {
 
@@ -33,7 +34,8 @@ function setVars(radio,radioG,alturaG){
 	var geometriesParams=[];
 	radioCylindro=radio;
 	radioGauss=radioG;
-	alturaGauss=alturaG;
+	alturaCylindroGausiano=alturaG;
+	tamanioLiniaCE=radioGauss+5;
 	if(	document.getElementById("contenedor")){
 		var el=document.getElementById("contenedor");
 		el.parentNode.removeChild( el );
@@ -75,7 +77,7 @@ function crearGrafico(){
 	cilindroGausiano = new THREE.CylinderGeometry(radioGauss, radioGauss, alturaCylindroGausiano, 20);
 		//alert(cilindroGausiano);
 
-	alert(radioCylindro);
+	alert(alturaCylindroGausiano);
 
 	loader = new THREE.FontLoader();
 	loader.load( 'fonts/helvetiker_regular.typeface.js', function ( font ) {
@@ -171,10 +173,22 @@ function addStuff() {
 	group = new THREE.Group();
 	scene.add( group );
 	getVars();
-	var cylindermaterial = new THREE.MeshLambertMaterial({wireframe: true, color: 0x000000});
 
+colorSuperficieMenor=0xFFD966;
+if( radioCylindro>=radioGauss){
 
-	var cylinder2 = new THREE.Mesh(cilindroGausiano, cylindermaterial);
+	var cilindroMaterial = new THREE.MeshBasicMaterial( { color: 0xCC0000, wireframe: true, opacity: 0.5 } );
+	var cylinderGausmaterial=new THREE.MeshPhongMaterial( { color: colorSuperficieMenor } )
+
+}else{
+
+	var cylinderGausmaterial = new THREE.MeshBasicMaterial( { color: 0xCC0000, wireframe: true, opacity: 0.5 } );
+	var cilindroMaterial=new THREE.MeshPhongMaterial( { color: colorSuperficieMenor } )
+}
+
+//var cylindermaterial = new THREE.MeshPhongMaterial( { color: 0x7777ff } );
+
+	var cylinder2 = new THREE.Mesh(cilindroGausiano, cylinderGausmaterial);
 
 //	var mesh = new THREE.MeshPhongMaterial( { color: 0x000000, specular: 0x666666, emissive: 0xff0000, shininess: 10, shading: THREE.SmoothShading, opacity: 0.9, transparent: true } );
 //		var mesh = new THREE.MeshStandardMaterial( { map: imgTexture, bumpMap: imgTexture, bumpScale: bumpScale, color: diffuseColor, metalness: metalness, roughness: roughness, shading: THREE.SmoothShading, envMap: localReflectionCube } )
@@ -183,14 +197,17 @@ function addStuff() {
 //var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: 0xfefefe, wireframe: true, opacity: 0.5 } ) );
 
 //verde
-var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: 0x93C54B, wireframe: false, opacity: 10 } ) );
+//var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: 0x93C54B, wireframe: false, opacity: 10 } ) );
+
+var mesh = new THREE.Mesh( geometry, cilindroMaterial );
+
 
 	group.add( mesh );
 group.add( cylinder2 );
 
 	var fvNames = [ 'a', 'b', 'c', 'd' ];
 
-	var normalLength = 30;
+	var normalLength = radioGauss;
 
 	for( var f = 0, fl = geometry.faces.length; f < fl; f +=30 ) {
 		var face = geometry.faces[ f ];
@@ -205,7 +222,7 @@ group.add( cylinder2 );
 				face.normal,
 				centroid,
 				normalLength,
-				0x3333FF );
+				0x000000 );
 		mesh.add( arrow );
 	}
 
@@ -219,7 +236,7 @@ group.add( cylinder2 );
 					face.vertexNormals[ v ],
 					originalGeometry.vertices[ face[ fvNames[ v ] ] ],
 					normalLength,
-					0xFF3333 );
+					0x000000);
 			mesh.add( arrow );
 		}
 	}

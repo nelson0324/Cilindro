@@ -20,7 +20,6 @@ var myPrettyCode = function() {
   radioGauss=document.getElementById("radioGauss").value;
 
   alturaGauss=document.getElementById("alturaGauss").value;
-    alert(alturaGauss);
-     setVars(radio,radioGauss,alturaGauss);
+   setVars(radio,radioGauss,alturaGauss);
 
 };

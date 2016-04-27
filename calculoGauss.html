@@ -9,13 +9,25 @@
      <script src="js/controls/OrbitControls.js"></script>
      <script src="js/libs/stats.min.js"></script>
      <script src="loadjs.js"></script>
+		 <script type="text/javascript" src="js/libs/googleloader.js"></script>
+    <script type="text/javascript">
+			var dataTablaValores=[];
+			var dataGrafico=[	['Radio', 'Campo Electrico']];
+      google.charts.load('current', {'packages':['corechart','table']});
+
+    //  google.charts.setOnLoadCallback(drawChart);
+
+
+    </script>
+
 	</head>
 	<body>
 
 
 
-    <div id="contenedor">
-        main content here
+    <div id="container">
+        <div id="curve_chart" ></div>
+				<div id="table_div"></div>
     </div>
 
     <div id="sidebar">
@@ -24,12 +36,12 @@
       <div>  <input type="text" class="name" placeholder="Radio" id="radio"></div>
         <div>    <input type="text" class="name" placeholder="Radio Superficie Gausiana" id="radioGauss"></div
         <div>    <input type="text" class="name" placeholder="Altura Superficie Gausiana" id="alturaGauss"></div>
-          <input type="submit" class="submit" value="Register">
+          <input type="submit" class="submit" value="Calcular">
         </form>
     </div>
 
     <div id="footer">
-        footer content here
+        
     </div>
 
 

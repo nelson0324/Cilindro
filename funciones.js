@@ -12,6 +12,7 @@ var loader;
 var materials = [];
 var tamanioLiniaCE;
 
+
 var createSomething = function( klass, args ) {
 
 	var F = function( klass, args ) {
@@ -30,7 +31,7 @@ var createSomething = function( klass, args ) {
 
 function setVars(radio,radioG,alturaG){
 
-	alert(radio);
+
 	var geometriesParams=[];
 	radioCylindro=radio;
 	radioGauss=radioG;
@@ -45,6 +46,17 @@ function setVars(radio,radioG,alturaG){
 	init();
 	animate();
 	addStuff();
+
+	dataGrafico.push([ parseInt(radio),parseInt(radioG) ]);
+	drawChart();
+	dataTablaValores.push(	['Mike',  {v: 10000, f: '$10,000'}, true]);
+	drawTable();
+
+
+	/*	['Jim',   {v:8000,   f: '$8,000'},  false],
+	['Alice', {v: 12500, f: '$12,500'}, true],
+	['Bob',   {v: 7000,  f: '$7,000'},  true]*/
+
 }
 
 function crearGrafico(){
@@ -75,9 +87,9 @@ function crearGrafico(){
 	];
 
 	cilindroGausiano = new THREE.CylinderGeometry(radioGauss, radioGauss, alturaCylindroGausiano, 20);
-		//alert(cilindroGausiano);
+	//alert(cilindroGausiano);
 
-	alert(alturaCylindroGausiano);
+//	alert(alturaCylindroGausiano);
 
 	loader = new THREE.FontLoader();
 	loader.load( 'fonts/helvetiker_regular.typeface.js', function ( font ) {
@@ -94,27 +106,6 @@ function crearGrafico(){
 
 }
 
-function nextGeometry() {
-
-	geometryIndex ++;
-
-	if ( geometryIndex > geometriesParams.length - 1 ) {
-
-		geometryIndex = 0;
-
-	}
-
-	addStuff();
-
-}
-
-function switchGeometry(i) {
-
-	geometryIndex = i;
-
-	addStuff();
-}
-
 
 
 function addStuff() {
@@ -124,17 +115,12 @@ function addStuff() {
 		scene.remove( group );
 
 	}
-
 	var params = geometriesParams[ geometryIndex ];
-
 	geometry = createSomething( THREE[ params.type ], params.args );
-
 	// scale geometry to a uniform size
 	geometry.computeBoundingSphere();
-
-/*	var scaleFactor = 160 / geometry.boundingSphere.radius;
+	/*	var scaleFactor = 160 / geometry.boundingSphere.radius;
 	geometry.scale( scaleFactor, scaleFactor, scaleFactor );*/
-
 	var originalGeometry = geometry.clone();
 	originalGeometry.computeFaceNormals();
 	originalGeometry.computeVertexNormals( true );
@@ -144,7 +130,7 @@ function addStuff() {
 	geometry.computeFaceNormals();
 	geometry.computeVertexNormals( true );
 
-//	updateInfo();
+	//	updateInfo();
 
 	var faceABCD = "abcd";
 	var color, f, p, n, vertexIndex;
@@ -174,36 +160,36 @@ function addStuff() {
 	scene.add( group );
 	getVars();
 
-colorSuperficieMenor=0xFFD966;
-if( radioCylindro>=radioGauss){
+	colorSuperficieMenor=0xFFD966;
+	if( radioCylindro>=radioGauss){
 
-	var cilindroMaterial = new THREE.MeshBasicMaterial( { color: 0xCC0000, wireframe: true, opacity: 0.5 } );
-	var cylinderGausmaterial=new THREE.MeshPhongMaterial( { color: colorSuperficieMenor } )
+		var cilindroMaterial = new THREE.MeshBasicMaterial( { color: 0xCC0000, wireframe: true, opacity: 0.5 } );
+		var cylinderGausmaterial=new THREE.MeshPhongMaterial( { color: colorSuperficieMenor } )
 
-}else{
+	}else{
 
-	var cylinderGausmaterial = new THREE.MeshBasicMaterial( { color: 0xCC0000, wireframe: true, opacity: 0.5 } );
-	var cilindroMaterial=new THREE.MeshPhongMaterial( { color: colorSuperficieMenor } )
-}
+		var cylinderGausmaterial = new THREE.MeshBasicMaterial( { color: 0xCC0000, wireframe: true, opacity: 0.5 } );
+		var cilindroMaterial=new THREE.MeshPhongMaterial( { color: colorSuperficieMenor } )
+	}
 
-//var cylindermaterial = new THREE.MeshPhongMaterial( { color: 0x7777ff } );
+	//var cylindermaterial = new THREE.MeshPhongMaterial( { color: 0x7777ff } );
 
 	var cylinder2 = new THREE.Mesh(cilindroGausiano, cylinderGausmaterial);
 
-//	var mesh = new THREE.MeshPhongMaterial( { color: 0x000000, specular: 0x666666, emissive: 0xff0000, shininess: 10, shading: THREE.SmoothShading, opacity: 0.9, transparent: true } );
-//		var mesh = new THREE.MeshStandardMaterial( { map: imgTexture, bumpMap: imgTexture, bumpScale: bumpScale, color: diffuseColor, metalness: metalness, roughness: roughness, shading: THREE.SmoothShading, envMap: localReflectionCube } )
+	//	var mesh = new THREE.MeshPhongMaterial( { color: 0x000000, specular: 0x666666, emissive: 0xff0000, shininess: 10, shading: THREE.SmoothShading, opacity: 0.9, transparent: true } );
+	//		var mesh = new THREE.MeshStandardMaterial( { map: imgTexture, bumpMap: imgTexture, bumpScale: bumpScale, color: diffuseColor, metalness: metalness, roughness: roughness, shading: THREE.SmoothShading, envMap: localReflectionCube } )
 
-//trasparente
-//var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: 0xfefefe, wireframe: true, opacity: 0.5 } ) );
+	//trasparente
+	//var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: 0xfefefe, wireframe: true, opacity: 0.5 } ) );
 
-//verde
-//var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: 0x93C54B, wireframe: false, opacity: 10 } ) );
+	//verde
+	//var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: 0x93C54B, wireframe: false, opacity: 10 } ) );
 
-var mesh = new THREE.Mesh( geometry, cilindroMaterial );
+	var mesh = new THREE.Mesh( geometry, cilindroMaterial );
 
 
 	group.add( mesh );
-group.add( cylinder2 );
+	group.add( cylinder2 );
 
 	var fvNames = [ 'a', 'b', 'c', 'd' ];
 
@@ -213,50 +199,50 @@ group.add( cylinder2 );
 		var face = geometry.faces[ f ];
 
 		var centroid = new THREE.Vector3()
-			.add( geometry.vertices[ face.a ] )
-			.add( geometry.vertices[ face.b ] )
-			.add( geometry.vertices[ face.c ] )
-			.divideScalar( 3 );
+		.add( geometry.vertices[ face.a ] )
+		.add( geometry.vertices[ face.b ] )
+		.add( geometry.vertices[ face.c ] )
+		.divideScalar( 3 );
 
 		var arrow = new THREE.ArrowHelper(
-				face.normal,
-				centroid,
-				normalLength,
-				0x000000 );
-		mesh.add( arrow );
-	}
-
-	for( var f = 0, fl = originalGeometry.faces.length; f < fl; f ++ ) {
-		var face = originalGeometry.faces[ f ];
-		if( face.vertexNormals === undefined ) {
-			continue;
+			face.normal,
+			centroid,
+			normalLength,
+			0x000000 );
+			mesh.add( arrow );
 		}
-		for( var v = 0, vl = face.vertexNormals.length; v < vl; v ++ ) {
-			var arrow = new THREE.ArrowHelper(
+
+		for( var f = 0, fl = originalGeometry.faces.length; f < fl; f ++ ) {
+			var face = originalGeometry.faces[ f ];
+			if( face.vertexNormals === undefined ) {
+				continue;
+			}
+			for( var v = 0, vl = face.vertexNormals.length; v < vl; v ++ ) {
+				var arrow = new THREE.ArrowHelper(
 					face.vertexNormals[ v ],
 					originalGeometry.vertices[ face[ fvNames[ v ] ] ],
 					normalLength,
 					0x000000);
-			mesh.add( arrow );
-		}
-	}
+					mesh.add( arrow );
+				}
+			}
 
-	for( var f = 0, fl = mesh.geometry.faces.length; f < fl; f ++ ) {
-		var face = mesh.geometry.faces[ f ];
-		if( face.vertexNormals === undefined ) {
-			continue;
-		}
-		for( var v = 0, vl = face.vertexNormals.length; v < vl; v ++ ) {
-			var arrow = new THREE.ArrowHelper(
-					face.vertexNormals[ v ],
-					mesh.geometry.vertices[ face[ fvNames[ v ] ] ],
-					normalLength,
-					0x000000 );
-			mesh.add( arrow );
-		}
-	}
+			for( var f = 0, fl = mesh.geometry.faces.length; f < fl; f ++ ) {
+				var face = mesh.geometry.faces[ f ];
+				if( face.vertexNormals === undefined ) {
+					continue;
+				}
+				for( var v = 0, vl = face.vertexNormals.length; v < vl; v ++ ) {
+					var arrow = new THREE.ArrowHelper(
+						face.vertexNormals[ v ],
+						mesh.geometry.vertices[ face[ fvNames[ v ] ] ],
+						normalLength,
+						0x000000 );
+						mesh.add( arrow );
+					}
+				}
 
-}
+			}
 			function init(radiusTop) {
 
 
@@ -342,4 +328,44 @@ group.add( cylinder2 );
 			function getVars(){
 				cylindergeometry2 = new THREE.CylinderGeometry(40, 40, 200, 150, false);
 				//alert(cylindergeometry2);
+			}
+
+			function drawChart() {
+
+				/*[  4, 7],
+				[  9,2],
+				[  16, 1.125],
+				[  25, 0.72],*/
+
+				var data = google.visualization.arrayToDataTable(
+
+					dataGrafico
+
+				);
+
+				var options = {
+					title: 'Company Performance',
+					curveType: 'function',
+					legend: { position: 'bottom' }
+				};
+
+				var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+				chart.draw(data, options);
+			}
+
+			function drawTable() {
+				var data = new google.visualization.DataTable();
+				data.addColumn('string', 'Name');
+				data.addColumn('number', 'Salary');
+				data.addColumn('boolean', 'Full Time Employee');
+				data.addRows(
+
+					dataTablaValores
+
+				);
+
+				var table = new google.visualization.Table(document.getElementById('table_div'));
+
+				table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
 			}

@@ -6,53 +6,53 @@
     <body>
         <script src="three.js"></script>
         <script>
- 
+
             var scene = new THREE.Scene();
             var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
- 
+
             var renderer = new THREE.WebGLRenderer();
             renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
- 
-         
- 
+
+
+
             camera.position.z = 5;
- 
-         
-            var cylindergeometry = new THREE.CylinderGeometry(0.6, 0.6, 2, 50, false);
+
+
+            var cylindergeometry = new THREE.CylinderGeometry(0.6, 0.6, 2, 50, false,true);
             var cylindermaterial = new THREE.MeshLambertMaterial({wireframe: false, color: 0x000000});
-			
+
 			var lineBasicMaterial = new THREE.LineBasicMaterial({color: 0x000000});
             var cylinder = new THREE.Mesh(cylindergeometry, lineBasicMaterial);
- 
- 
-			var cylindergeometry2 = new THREE.CylinderGeometry(1.8, 1.8, 6, 150, false);
+
+
+			var cylindergeometry2 = new THREE.CylinderGeometry(1.8, 1.8, 6, 150, false,true);
             var cylindermaterial = new THREE.MeshLambertMaterial({wireframe: true, color: 0x000000});
-			
+
 			var lineBasicMaterial = new THREE.LineBasicMaterial({color: 0x000000});
             var cylinder2 = new THREE.Mesh(cylindergeometry2, cylindermaterial);
- 
- 
+
+
             cylinder.position.set(2.0,0,0);
 			 cylinder2.position.set(2.0,0,0);
             scene.add(cylinder);
             scene.add(cylinder2);
             var render = function () {
                 requestAnimationFrame(render);
- 
-              
+
+
                cylinder.rotation.y += 0.01;
                 cylinder.rotation.x += 0.01;
                 cylinder.rotation.z += 0.01;
-				
+
 				 cylinder2.rotation.y += 0.01;
                 cylinder2.rotation.x += 0.01;
                 cylinder2.rotation.z += 0.01;
- 
- 
+
+
                 renderer.render(scene, camera);
             };
- 
+
             // Calling the render function
             render();
         </script>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - geometry - Subdivisions with Catmull-Clark</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	   <link rel="stylesheet" type="text/css" href="estilo.css" media="screen" />
+     <script src="js/three.min.js"></script>
+     <script src="js/controls/OrbitControls.js"></script>
+     <script src="js/libs/stats.min.js"></script>
+     <script src="loadjs.js"></script>
+		 <script type="text/javascript" src="js/libs/googleloader.js"></script>
+    <script type="text/javascript">
+			var dataTablaValores=[];
+			var dataGrafico=[	['Radio', 'Campo Electrico']];
+      google.charts.load('current', {'packages':['corechart','table']});
+
+    //  google.charts.setOnLoadCallback(drawChart);
+
+
+    </script>
+
+	</head>
+	<body>
+
+    <div id="container">
+        <div id="curve_chart" ></div>
+				<div id="table_div"></div>
+    </div>
+
+    <div id="sidebar">
+
+      <form class="form" method="post" action="javascript:loadScript('funcionesCilindroHueco.js',cilindroHueco);">
+      <div>  <input type="text" class="name" placeholder="Radio" id="radio"></div>
+			<div>  <input type="text" class="name" placeholder="Radio Interno" id="radioInterno"></div>
+        <div>    <input type="text" class="name" placeholder="Radio Superficie Gausiana" id="radioGauss"></div
+        <div>    <input type="text" class="name" placeholder="Altura Superficie Gausiana" id="alturaGauss"></div>
+          <input type="submit" class="submit" value="Calcular">
+        </form>
+    </div>
+
+    <div id="footer">
+
+    </div>
+
+
+</body>
+</html>

@@ -29,7 +29,7 @@ var createSomething = function( klass, args ) {
 
 // Create new object by parameters
 
-function setVars(radio,radioG,alturaG){
+function setVars(radio,radioG,alturaG, valorCarga){
 
 
 	var geometriesParams=[];
@@ -47,9 +47,12 @@ function setVars(radio,radioG,alturaG){
 	animate();
 	addStuff();
 
-	dataGrafico.push([ parseInt(radio),parseInt(radioG) ]);
+	campoElectrico=calcular(radio,radioG,alturaG, valorCarga);
+
+	dataGrafico.push([ parseInt(radioG),parseInt(campoElectrico) ]);
 	drawChart();
-	dataTablaValores.push(	['Mike',  {v: 10000, f: '$10,000'}, true]);
+	dataTablaValores.push(	[{v: parseInt(radio), f: radio},  {v: parseInt(radioG), f: radioG},
+		{v: parseInt(alturaG), f: alturaG},  {v: parseInt(valorCarga), f: valorCarga}, {v: parseInt(campoElectrico), f: String(campoElectrico) }]);
 	drawTable();
 
 
@@ -58,6 +61,30 @@ function setVars(radio,radioG,alturaG){
 	['Bob',   {v: 7000,  f: '$7,000'},  true]*/
 
 }
+
+function calcular(radio,radioG,alturaG, valorCarga){
+
+
+			eo = 8,8542*Math.pow(10,-12);
+
+			if (radioG>radio){
+				volumen=Math.PI*(Math.pow(radio,2)*alturaG);
+				P=valorCarga/volumen;
+				E=(P*(Math.pow(radio,2)))/ (2*radioG*eo);
+			}else{
+				volumen=Math.PI*(Math.pow(radioG,2)*alturaG);
+				P=valorCarga/volumen;
+
+				E=(P*radioG)/2*eo;
+			}
+			//E= (valorCarga)/((2* Math.PI)*radioG*alturaG*eo);
+		//alert(E);
+			return E;
+
+
+
+}
+
 
 function crearGrafico(){
 
@@ -356,9 +383,12 @@ function addStuff() {
 
 			function drawTable() {
 				var data = new google.visualization.DataTable();
-				data.addColumn('string', 'Name');
-				data.addColumn('number', 'Salary');
-				data.addColumn('boolean', 'Full Time Employee');
+					data.addColumn('number', 'Radio S Gauss');
+					data.addColumn('number', 'Radio Cilindro');
+					data.addColumn('number', 'Altura S Gauss');
+					data.addColumn('number', 'Q encerrada');
+				  data.addColumn('number', 'Campo Electrico');
+
 				data.addRows(
 
 					dataTablaValores

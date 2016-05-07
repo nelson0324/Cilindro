@@ -18,9 +18,9 @@ function loadScript(url, callback)
 var cilindroMacizo = function() {
   radio=document.getElementById("radio").value;
   radioGauss=document.getElementById("radioGauss").value;
-
   alturaGauss=document.getElementById("alturaGauss").value;
-   setVars(radio,radioGauss,alturaGauss);
+  valorCarga=document.getElementById("valorCarga").value;
+   setVars(radio,radioGauss,alturaGauss,valorCarga);
 
 };
 

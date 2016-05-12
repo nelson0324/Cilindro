@@ -49,7 +49,7 @@ function setVars(radio,radioG,alturaG, valorCarga){
 
 	campoElectrico=calcular(radio,radioG,alturaG, valorCarga);
 
-	dataGrafico.push([ parseInt(radioG),parseInt(campoElectrico) ]);
+	dataGrafico.push([ parseInt(radioG),parseFloat(campoElectrico) ]);
 	drawChart();
 	dataTablaValores.push(	[{v: parseInt(radio), f: radio},  {v: parseInt(radioG), f: radioG},
 		{v: parseInt(alturaG), f: alturaG},  {v: parseInt(valorCarga), f: valorCarga}, {v: parseInt(campoElectrico), f: String(campoElectrico) }]);
@@ -62,20 +62,37 @@ function setVars(radio,radioG,alturaG, valorCarga){
 
 }
 
-function calcular(radio,radioG,alturaG, valorCarga){
+function e_gauss_dentro(l,rc,rg,q)
+{
+	//Donde:
+	//l:	es la longitud del cilindro
+	//rc:	es el Radio del Cilindro
+	//rg:	es el Radio del Gauss
+	//q:	es la carga
+	var epsilon=8.854187817 * Math.pow(10,-12);
+	return ((q/Math.PI*Math.pow(rc,2)*l)*rg)/(2*epsilon);
+}
 
+function e_gauss_fuera(l,rc,rg,q)
+{
+	//Donde:
+	//l:	es la longitud del cilindro
+	//rc:	es el Radio del Cilindro
+	//rg:	es el Radio del Gauss
+	//q:	es la carga
+	var epsilon=8.854187817 * Math.pow(10,-12);
+	return ((q/Math.PI*Math.pow(rc,2)*l)*Math.pow(rc,2))/(2*rg*epsilon);
+}
+
+function calcular(radio,radioG,alturaG, valorCarga){
 
 			eo = 8,8542*Math.pow(10,-12);
 
-			if (radioG>radio){
-				volumen=Math.PI*(Math.pow(radio,2)*alturaG);
-				P=valorCarga/volumen;
-				E=(P*(Math.pow(radio,2)))/ (2*radioG*eo);
-			}else{
-				volumen=Math.PI*(Math.pow(radioG,2)*alturaG);
-				P=valorCarga/volumen;
+			if (radioG>=radio){
 
-				E=(P*radioG)/2*eo;
+				E=e_gauss_dentro(alturaG,radio,radioG,valorCarga);
+			}else{
+				E=e_gauss_fuera(alturaG,radio,radioG,valorCarga);
 			}
 			//E= (valorCarga)/((2* Math.PI)*radioG*alturaG*eo);
 		//alert(E);
@@ -363,31 +380,49 @@ function addStuff() {
 				[  9,2],
 				[  16, 1.125],
 				[  25, 0.72],*/
+				var dataChart = new google.visualization.DataTable();
+			      dataChart.addColumn('number', 'Radio aaaa');
+			      dataChart.addColumn('number', 'Campo Electrico ');
+						//row=[];
+						//row.push(dataGrafico);
+						alert(dataGrafico);
+						dataChart.addRows(dataGrafico);
 
-				var data = google.visualization.arrayToDataTable(
+			/*	var data = google.visualization.arrayToDataTable(
 
 					dataGrafico
 
-				);
+				);*/
 
 				var options = {
-					title: 'Company Performance',
-					curveType: 'function',
-					legend: { position: 'bottom' }
+					title: 'Campo Electrico en Cilindro',
+				//	curveType: 'function',
+				curveType: 'function',
+				hAxes: {
+				  	0: {title: 'Radio Superficie Gauss (M)'}
+				  },
+					legend: { position: 'top' },
+					vAxes: {
+				 // Adds titles to each axis.
+				 0: {title: 'Campo Electrico (N/C)'},
+				 1: {title: 'Radio Superficie Gauss (M)'}
+			 },
+
+
 				};
 
 				var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
-				chart.draw(data, options);
+				chart.draw(dataChart, options);
 			}
 
 			function drawTable() {
 				var data = new google.visualization.DataTable();
-					data.addColumn('number', 'Radio S Gauss');
-					data.addColumn('number', 'Radio Cilindro');
-					data.addColumn('number', 'Altura S Gauss');
-					data.addColumn('number', 'Q encerrada');
-				  data.addColumn('number', 'Campo Electrico');
+					data.addColumn('number', 'Radio Cilindro(M)');
+					data.addColumn('number', 'Radio S Gauss(M)');
+					data.addColumn('number', 'Longitud S Gauss(M)');
+					data.addColumn('number', 'Q encerrada(C)');
+				  data.addColumn('number', 'Campo Electrico(N/C)');
 
 				data.addRows(
 

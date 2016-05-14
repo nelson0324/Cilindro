@@ -89,10 +89,10 @@ function calcular(radio,radioG,alturaG, valorCarga){
 			eo = 8,8542*Math.pow(10,-12);
 
 			if (radioG>=radio){
+E=e_gauss_fuera(alturaG,radio,radioG,valorCarga);
 
-				E=e_gauss_dentro(alturaG,radio,radioG,valorCarga);
 			}else{
-				E=e_gauss_fuera(alturaG,radio,radioG,valorCarga);
+					E=e_gauss_dentro(alturaG,radio,radioG,valorCarga);
 			}
 			//E= (valorCarga)/((2* Math.PI)*radioG*alturaG*eo);
 		//alert(E);
@@ -385,7 +385,7 @@ function addStuff() {
 			      dataChart.addColumn('number', 'Campo Electrico ');
 						//row=[];
 						//row.push(dataGrafico);
-						alert(dataGrafico);
+					//	alert(dataGrafico);
 						dataChart.addRows(dataGrafico);
 
 			/*	var data = google.visualization.arrayToDataTable(

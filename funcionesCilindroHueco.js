@@ -40,12 +40,7 @@ function setVars(radio,radioInterno,radioG,alturaG,valorCarga){
 			return false;
 	}
 
-	if(radioInterno >=radioG){
 
-		alert("El valor del campo Electrico es 0");
-
-		return false;
-	}
 
 	var geometriesParams=[];
 	radioCylindro=radio;
@@ -63,7 +58,7 @@ function setVars(radio,radioInterno,radioG,alturaG,valorCarga){
 	animate();
 	addStuff();
 	var campoElectrico=calcular(radio,radioInterno,radioG,alturaG,valorCarga);
-	alert(campoElectrico);
+
 	dataGrafico.push([ parseInt(radioG),parseFloat(campoElectrico) ]);
 //	dataGrafico.push([ parseInt(radio),parseInt(radioG) ]);
 	drawChart();
@@ -89,22 +84,22 @@ l=parseFloat(l);
 q=parseFloat(q);
 
 	var epsilon=8.854187817 * Math.pow(10,-12);
-if(ri<rg)
 
-	if( (ri<rg) &&  (rg<=rc)){
+
+	if( (ri<=rg) &&  (rg<=rc)){
 	//	alert("Rg en la mitad");
-		h=(Math.PI*Math.pow(rc,2))-(Math.PI*Math.pow(ri,2));
-		h=(Math.PI*Math.pow(rg,2))-(Math.PI*Math.pow(ri,2));
+		A=(Math.PI*Math.pow(rc,2))-(Math.PI*Math.pow(ri,2));
+	//	A= (Math.PI*Math.pow(rg,2))-(Math.PI*Math.pow(ri,2));
 
 	//	h2=(Math.PI*Math.pow(rc,2))-(Math.PI*Math.pow(ri,2));
-		return ((q/h*l)*(Math.pow(rg,2)-Math.pow(ri,2)))/(2*epsilon*rg);
+		return ((q/A*l)*(Math.pow(rg,2)-Math.pow(ri,2)))/(2*epsilon*rg);
 	};
 	if( (rc<=rg)) {
 
 	//	alert("Rg afuera");
 	//	h=(Math.PI*Math.pow(rc,2))-(Math.PI*Math.pow(ri,2));
-		h2=(Math.PI*Math.pow(rg,2))-(Math.PI*Math.pow(ri,2));
-		return ((q/h2*l)*(Math.pow(rc,2)- Math.pow(ri,2)))/(2*epsilon*rg);
+		A2=(Math.PI*Math.pow(rg,2))-(Math.PI*Math.pow(ri,2));
+		return ((q/A2*l)*(Math.pow(rc,2)- Math.pow(ri,2)))/(2*epsilon*rg);
 
 }
 }
@@ -211,10 +206,10 @@ function addStuff() {
 	scene.add( group );
 	getVars();
 
-	colorSuperficieMenor=0xFFD966;
+	colorSuperficieMenor=0xBCB5B2;
 	if( radioCylindro>=radioGauss){
 
-		var cilindroMaterial = new THREE.MeshLambertMaterial( { color: 0xCC0000,  opacity: 0.5, transparent:true, emissive:0xCC0000,specular:0xCC0000 } );
+		var cilindroMaterial = new THREE.MeshLambertMaterial( { color: 0xD6522A,  opacity: 0.5, transparent:true, emissive:0xCC0000,specular:0xCC0000 } );
 		var cylinderGausmaterial=new THREE.MeshPhongMaterial( { color: colorSuperficieMenor } )
 
 	}else{

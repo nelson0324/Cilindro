@@ -204,7 +204,7 @@ function addStuff() {
 	scene.add( group );
 	getVars();
 
-	colorSuperficieMenor=0xFFD966;
+	colorSuperficieMenor=0x177EED;
 	if( radioCylindro>=radioGauss){
 
 		var cilindroMaterial = new THREE.MeshBasicMaterial( { color: 0xCC0000, wireframe: true, opacity: 0.5 } );

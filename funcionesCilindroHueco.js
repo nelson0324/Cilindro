@@ -12,6 +12,7 @@ var loader;
 var materials = [];
 var tamanioLiniaCE;
 var radioInterno;
+var valorCarga;
 
 
 var createSomething = function( klass, args ) {
@@ -30,13 +31,20 @@ var createSomething = function( klass, args ) {
 
 // Create new object by parameters
 
-function setVars(radio,radioInterno,radioG,alturaG){
+function setVars(radio,radioInterno,radioG,alturaG,valorCarga){
 
 	if(radioInterno >=radio){
 
 			alert("El radio Interno del cilindro no puede ser mayor o igual al radio externo");
 
 			return false;
+	}
+
+	if(radioInterno >=radioG){
+
+		alert("El valor del campo Electrico es 0");
+
+		return false;
 	}
 
 	var geometriesParams=[];
@@ -54,9 +62,14 @@ function setVars(radio,radioInterno,radioG,alturaG){
 	init();
 	animate();
 	addStuff();
-	dataGrafico.push([ parseInt(radio),parseInt(radioG) ]);
+	var campoElectrico=calcular(radio,radioInterno,radioG,alturaG,valorCarga);
+	alert(campoElectrico);
+	dataGrafico.push([ parseInt(radioG),parseFloat(campoElectrico) ]);
+//	dataGrafico.push([ parseInt(radio),parseInt(radioG) ]);
 	drawChart();
-	dataTablaValores.push(	['Mike',  {v: 10000, f: '$10,000'}, true]);
+	dataTablaValores.push(	[{v: parseInt(radio), f: radio}, {v: parseInt(radioInterno), f: radioInterno}, {v: parseInt(radioG), f: radioG},
+		{v: parseInt(alturaG), f: alturaG},  {v: parseInt(valorCarga), f: valorCarga}, {v: parseInt(campoElectrico), f: String(campoElectrico) }]);
+
 	drawTable();
 
 
@@ -64,6 +77,36 @@ function setVars(radio,radioInterno,radioG,alturaG){
 	['Alice', {v: 12500, f: '$12,500'}, true],
 	['Bob',   {v: 7000,  f: '$7,000'},  true]*/
 
+}
+
+
+function calcular(rc,ri,rg,l,q){
+
+rg=parseFloat(rg);
+rc=parseFloat(rc);
+ri=parseFloat(ri);
+l=parseFloat(l);
+q=parseFloat(q);
+
+	var epsilon=8.854187817 * Math.pow(10,-12);
+if(ri<rg)
+
+	if( (ri<rg) &&  (rg<=rc)){
+	//	alert("Rg en la mitad");
+		h=(Math.PI*Math.pow(rc,2))-(Math.PI*Math.pow(ri,2));
+		h=(Math.PI*Math.pow(rg,2))-(Math.PI*Math.pow(ri,2));
+
+	//	h2=(Math.PI*Math.pow(rc,2))-(Math.PI*Math.pow(ri,2));
+		return ((q/h*l)*(Math.pow(rg,2)-Math.pow(ri,2)))/(2*epsilon*rg);
+	};
+	if( (rc<=rg)) {
+
+	//	alert("Rg afuera");
+	//	h=(Math.PI*Math.pow(rc,2))-(Math.PI*Math.pow(ri,2));
+		h2=(Math.PI*Math.pow(rg,2))-(Math.PI*Math.pow(ri,2));
+		return ((q/h2*l)*(Math.pow(rc,2)- Math.pow(ri,2)))/(2*epsilon*rg);
+
+}
 }
 
 function crearGrafico(){
@@ -345,29 +388,51 @@ function addStuff() {
 				[  9,2],
 				[  16, 1.125],
 				[  25, 0.72],*/
+				var dataChart = new google.visualization.DataTable();
+						dataChart.addColumn('number', 'Radio aaaa');
+						dataChart.addColumn('number', 'Campo Electrico ');
+						//row=[];
+						//row.push(dataGrafico);
+					//	alert(dataGrafico);
+						dataChart.addRows(dataGrafico);
 
-				var data = google.visualization.arrayToDataTable(
+			/*	var data = google.visualization.arrayToDataTable(
 
 					dataGrafico
 
-				);
+				);*/
 
 				var options = {
-					title: 'Company Performance',
-					curveType: 'function',
-					legend: { position: 'bottom' }
-				};
+					title: 'Campo Electrico en Cilindro',
+				//	curveType: 'function',
+				curveType: 'function',
+				hAxes: {
+						0: {title: 'Radio Superficie Gauss (M)'}
+					},
+					legend: { position: 'top' },
+					vAxes: {
+				 // Adds titles to each axis.
+				 0: {title: 'Campo Electrico (N/C)'},
+				 1: {title: 'Radio Superficie Gauss (M)'}
+			 },
 
+
+				};
 				var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
-				chart.draw(data, options);
-			}
+				chart.draw(dataChart, options);
+
+				}
 
 			function drawTable() {
 				var data = new google.visualization.DataTable();
-				data.addColumn('string', 'Name');
-				data.addColumn('number', 'Salary');
-				data.addColumn('boolean', 'Full Time Employee');
+					data.addColumn('number', 'Radio Cilindro(M)');
+						data.addColumn('number', 'Radio Interno Cilindro(M)');
+					data.addColumn('number', 'Radio S Gauss(M)');
+					data.addColumn('number', 'Longitud S Gauss(M)');
+					data.addColumn('number', 'Q encerrada(C)');
+				  data.addColumn('number', 'Campo Electrico(N/C)');
+
 				data.addRows(
 
 					dataTablaValores

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>three.js webgl - geometry - Subdivisions with Catmull-Clark</title>
@@ -11,9 +11,9 @@
      <script src="loadjs.js"></script>
 		 <script type="text/javascript" src="js/libs/googleloader.js"></script>
     <script type="text/javascript">
-			var dataTablaValores=[];
-			var dataGrafico=[	['Radio', 'Campo Electrico']];
-      google.charts.load('current', {'packages':['corechart','table']});
+    var dataTablaValores=[];
+    var dataGrafico=[	];
+    google.charts.load('current', {'packages':['corechart','table','line']});
 
     //  google.charts.setOnLoadCallback(drawChart);
 
@@ -33,12 +33,14 @@
       <form class="form" method="post" action="javascript:loadScript('funcionesCilindroHueco.js',cilindroHueco);">
       <div>  <input type="text" class="name" placeholder="Radio" id="radio"></div>
 			<div>  <input type="text" class="name" placeholder="Radio Interno" id="radioInterno"></div>
-        <div>    <input type="text" class="name" placeholder="Radio Superficie Gausiana" id="radioGauss"></div
+        <div>    <input type="text" class="name" placeholder="Radio Superficie Gausiana" id="radioGauss"></div>
         <div>    <input type="text" class="name" placeholder="Altura Superficie Gausiana" id="alturaGauss"></div>
-          <input type="submit" class="submit" value="Calcular">
-        </form>
-    </div>
+        <div>    <input type="text" class="name" placeholder="valor Carga" id="valorCarga"></div>
 
+
+    </div>
+    <input type="submit" class="submit" value="Calcular">
+  </form>
     <div id="footer">
 
     </div>

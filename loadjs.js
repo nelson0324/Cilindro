@@ -28,8 +28,8 @@ var cilindroHueco = function() {
   radio=document.getElementById("radio").value;
   radioInterno=document.getElementById("radioInterno").value;
   radioGauss=document.getElementById("radioGauss").value;
-
+  valorCarga=document.getElementById("valorCarga").value;
   alturaGauss=document.getElementById("alturaGauss").value;
-   setVars(radio,radioInterno,radioGauss,alturaGauss);
+   setVars(radio,radioInterno,radioGauss,alturaGauss,valorCarga);
 
 };

@@ -207,15 +207,16 @@ function addStuff() {
 	getVars();
 
 	colorSuperficieMenor=0xBCB5B2;
+	colorSuperficieMenor=0x663300
 	if( radioCylindro>=radioGauss){
 
-		var cilindroMaterial = new THREE.MeshLambertMaterial( { color: 0xD6522A,  opacity: 0.5, transparent:true, emissive:0xCC0000,specular:0xCC0000 } );
+		var cilindroMaterial = new THREE.MeshLambertMaterial( { color: 0x00b33c,  opacity: 0.5, transparent:true, emissive:0x00b33c,specular:0x00b33c } );
 		var cylinderGausmaterial=new THREE.MeshPhongMaterial( { color: colorSuperficieMenor } )
 
 	}else{
 
-		var cylinderGausmaterial = new THREE.MeshBasicMaterial( { color: 0xCC0000, wireframe: true, opacity: 0.5 } );
-		var cilindroMaterial=new THREE.MeshPhongMaterial( { color: colorSuperficieMenor } )
+		var cylinderGausmaterial = new THREE.MeshBasicMaterial( { color: 0x663300, wireframe: true, opacity: 0.5 } );
+		var cilindroMaterial=new THREE.MeshPhongMaterial( { color: 0x00b33c } )
 	}
 
 	//var cylindermaterial = new THREE.MeshPhongMaterial( { color: 0x7777ff } );
@@ -292,7 +293,9 @@ function addStuff() {
 			}
 			function init(radiusTop) {
 
-
+				if(document.getElementById('contenedor')){
+					document.body.removeChild(document.getElementById(contenedor));
+				}
 				container = document.createElement( 'div' );
 				container.id="contenedor";
 				//container.style.float = 'left';

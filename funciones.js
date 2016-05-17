@@ -289,7 +289,9 @@ function addStuff() {
 			}
 			function init(radiusTop) {
 
-
+				if(document.getElementById('contenedor')){
+					document.body.removeChild(document.getElementById(contenedor));
+				}
 				container = document.createElement( 'div' );
 				container.id="contenedor";
 				//container.style.float = 'left';
